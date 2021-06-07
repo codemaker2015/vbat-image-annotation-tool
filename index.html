@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VBAT - Box Annotation Tool</title>
+    <link href="vbat.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <script src="canvas.min.js"></script>
+    <script src="jszip.min.js"></script>
+    <script src="filesaver.min.js"></script>
+    <script src="vbat.js"></script>
+
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="left">
+            <form action="">
+                <div class="data__container">
+                    <div class="wrapper-line">
+                        <label for="images" style="margin-right: 10px;">Images:</label>
+                        <input type="file" id="images" name="images" accept="image/jpeg, image/png" multiple />
+                        <input type="button" name="cropImages" id="cropImages" value="Crop & Save" />
+                    </div>
+                    <div class="wrapper-line search">
+                        <input type="text" class="imageSearch" id="imageSearch" name="imageSearch" placeholder="Enter filename" />
+                        <img src="https://img.icons8.com/search" width="20px" height="20px"/>
+                    </div>
+
+                    <label for="imageList"></label><select name="imageList" id="imageList" size="5" multiple></select>
+
+                    <div id="imageInformation"></div>
+                </div>
+                <div class="data__container">
+                    <div class="wrapper-line" style="margin-bottom: 5px;">
+                        <label for="classes" style="margin-right: 10px;">Classes:</label>
+                        <input type="file" id="classes" name="classes" accept="text/plain" />
+                    </div>
+                    <label for="classList"></label><select name="classList" id="classList" size="5" multiple></select>
+
+                    <div id="bboxInformation"></div>
+                </div>
+                <div class="data__container">
+                    <div class="wrapper-line">
+                        <label for="bboxes" style="margin-right: 10px;">Bboxes:</label>
+                        <input type="file" id="bboxes" name="bboxes" accept="text/plain, application/zip" disabled
+                            multiple />
+                        <input type="button" name="restoreBboxes" id="restoreBboxes" value="Restore" disabled />
+                        <input type="button" name="saveBboxes" id="saveBboxes" value="Save YOLO" />
+                    </div>
+                    <div class="wrapper-line">
+                        <label for="vocFolder" style="margin-right: 10px;">Voc folder:</label>
+                        <input type="text" id="vocFolder" name="vocFolder" value="data" />
+                        <input type="button" name="saveVocBboxes" id="saveVocBboxes" value="Save VOC" />
+                        <input type="button" name="saveCocoBboxes" id="saveCocoBboxes" value="Save COCO" />
+                    </div>
+                    <div id="coco">
+                    </div>
+                </div>
+                <div class="data__container description">
+                    Shortcuts:
+                    <ul>
+                        <li> Mouse WHEEL - zoom in/out image </li>
+                        <li> Mouse RIGHT BUTTON - pan image </li>
+                        <li> Arrows LEFT and RIGHT - cycle images </li>
+                        <li> Arrows Up and DOWN - cycle classes  </li>
+                        <li> Key DELETE - remove selected Bbox </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="right" id="right">
+            <canvas id="canvas"></canvas>
+            <canvas id="hiddenCanvas"></canvas>
+        </div>
+    </div>
+</body>
+
+</html>
